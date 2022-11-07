@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import List from './List';
+import Conversation from './Conversation';
 
 class Exercise2 extends Component {
   constructor() {
@@ -7,14 +9,16 @@ class Exercise2 extends Component {
       displayConversation: null,
       conversations: [
         {
-          with: "Laura", convo: [
+          with: "Laura", 
+          convo: [
             { text: "Hi", sender: "self" },
             { text: "You there?", sender: "self" },
             { text: "Yeah, hi, what's up?", sender: "other" }
           ]
         },
         {
-          with: "Dad", convo: [
+          with: "Dad", 
+          convo: [
             { text: "Have you finished your school work yet?", sender: "other" },
             { text: "Yes.", sender: "self" },
             { text: "What do you mean, yes?", sender: "other" },
@@ -22,7 +26,8 @@ class Exercise2 extends Component {
           ]
         },
         {
-          with: "Shoobert", convo: [
+          with: "Shoobert",
+          convo: [
             { text: "Shoobert!!!", sender: "self" },
             { text: "Dude!!!!!!!!", sender: "other" },
             { text: "Shooooooooo BERT!", sender: "self" },
@@ -34,11 +39,28 @@ class Exercise2 extends Component {
     }
   }
 
+  displayConvo  = text => {
+    this.setState({
+      displayConversation:text
+    })
+  }
+
   render() {
     return (
       <div >
-        {/* If displayConverastion is null - 
-    App should render List, otherwise it should display Conversation */}
+        {this.state.conversations.map(q => {
+          return (
+            <div key={q} className="conversations">
+              
+              {this.state.displayConversation === null ?
+              <List contacts={q} displayConvo={this.displayConvo}/> :
+              <Conversation 
+                convo={this.state.conversations.find(c => c.with  === this.state.displayConversation).convo}
+                sender={this.state.displayConversation} 
+                displayConvo={this.displayConvo}/>}
+            </div>
+          )
+        })}
       </div>
     );
   }

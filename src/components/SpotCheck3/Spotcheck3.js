@@ -14,6 +14,19 @@ class SpotCheck3 extends Component {
 
     //write a likeQuote method that increase the likes of the first quote 
 
+
+
+    likeQuote = () =>{
+    //Here we must use the spread operator
+    //If we don't, then currentVIPs will just be a reference to this.state.vipClients
+    //And since currentVIPs.pop() is the same as this.state.vipClients.pop() - it's not allowed
+        let currentQuotes = [...this.state.quotes]
+        currentQuotes[0].likes++
+        this.setState({
+            quotes: currentQuotes
+        })
+    }
+
     render() {
         return (
             <div>
@@ -21,7 +34,7 @@ class SpotCheck3 extends Component {
                     return (
                         <div key={q.id} className="quotes">
                             <sup>{q.likes}</sup>
-                            <span onClick={this.likeQuote}>+</span>
+                            <span onClick={this.likeQuote}> <h3>+</h3> </span>
                             <span>{q.text}</span>
                         </div>
                     )
