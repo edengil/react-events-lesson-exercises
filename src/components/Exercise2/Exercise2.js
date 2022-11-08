@@ -48,19 +48,19 @@ class Exercise2 extends Component {
   render() {
     return (
       <div >
-        {this.state.conversations.map(q => {
-          return (
-            <div key={q} className="conversations">
+        {/* {this.state.conversations.map(q => { */}
+          {/* // return ( */}
+            <div className="conversations">
               
               {this.state.displayConversation === null ?
-              <List contacts={q} displayConvo={this.displayConvo}/> :
+              this.state.conversations.map(q => <List contacts={q} displayConvo={this.displayConvo}/>) :
               <Conversation 
                 convo={this.state.conversations.find(c => c.with  === this.state.displayConversation).convo}
                 sender={this.state.displayConversation} 
                 displayConvo={this.displayConvo}/>}
             </div>
-          )
-        })}
+           {/* ) */}
+        {/* })} */}
       </div>
     );
   }
